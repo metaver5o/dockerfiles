@@ -1,20 +1,13 @@
-#
-# Python Dockerfile
-#
-# https://github.com/dockerfile/python
-#
+FROM python:3.7
 
-# Pull base image.
-FROM dockerfile/ubuntu
+COPY requirements.txt /tmp/
 
-# Install Python.
-RUN \
-  apt-get update && \
-  apt-get install -y python python-dev python-pip python-virtualenv && \
-  rm -rf /var/lib/apt/lists/*
+RUN pip install -r /tmp/requirements.txt
 
-# Define working directory.
-WORKDIR /data
+RUN useradd --create-home appuser
+WORKDIR /home/appuser
+USER appuser
 
-# Define default command.
-CMD ["bash"]
+COPY yourscript.py .
+
+CMD [ "python", "./yourscript.py" ]
