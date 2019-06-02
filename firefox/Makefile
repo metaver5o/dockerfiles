@@ -5,7 +5,7 @@ NAME:= firefox
 
 .PHONY: all build dev current
 
-all: build
+all: current
 
 build:
 	echo ">>> kindly type 'current' and hit enter > dev version is still under development \n ---"; \
@@ -25,11 +25,9 @@ dev:
 current:
 	cat current.Dockerfile > Dockerfile
 	docker build -t firefox:current .
-	echo ">>> how much memory you want to allocate to this container? (512M, 1GB, 2GB and so on) \n ---"; \
-    read memory; \
 	docker run -ti --rm \
 	   --name $(NAME) \
-	   -m $$memory \
+	   -v /dev/shm:/dev/shm \
        -e DISPLAY=unix$$DISPLAY \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
        firefox:current
