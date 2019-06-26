@@ -23,6 +23,7 @@ dev:
        firefox:dev
 
 current:
+	xhost + 127.0.0.1
 	cat current.Dockerfile > Dockerfile
 	docker build -t firefox:current .
 	docker run -ti --rm \
