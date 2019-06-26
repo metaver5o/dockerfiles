@@ -28,6 +28,5 @@ current:
 	docker run -ti --rm \
 	   --name $(NAME) \
 	   -v /dev/shm:/dev/shm \
-       -e DISPLAY=unix$$DISPLAY \
-       -v /tmp/.X11-unix:/tmp/.X11-unix \
+       -e DISPLAY=host.docker.internal:0\
        firefox:current
