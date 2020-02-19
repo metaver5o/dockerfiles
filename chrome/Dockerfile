@@ -1,18 +1,16 @@
 #
-# Chrome Dockerfile
+# Ubuntu Desktop (LXDE) Dockerfile
 #
-# https://github.com/dockerfile/chrome
+# https://github.com/dockerfile/ubuntu-desktop
 #
 
 # Pull base image.
-FROM dockerfile/ubuntu-desktop
+FROM dockerfile/ubuntu
 
-# Install Chromium.
+# Install LXDE and VNC server.
 RUN \
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
   apt-get update && \
-  apt-get install -y google-chrome-stable && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y lxde-core lxterminal tightvncserver && \
   rm -rf /var/lib/apt/lists/*
 
 # Define working directory.
