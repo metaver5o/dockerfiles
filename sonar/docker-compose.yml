@@ -37,4 +37,4 @@ volumes:
   sonarqube7_conf:
   sonarqube7_bundled-plugins:
   postgresql7:
-  postgresql7_data:
+  postgresql7_data
