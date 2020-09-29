@@ -1,3 +1,1 @@
-# docker
-
-$HOME is where your DOCKERFILES are! <3
+# `$HOME` is where your `DOCKERFILES` are! `<3`
