@@ -1,0 +1,40 @@
+version: "3"
+services:
+  sonarqube:
+    image: sonarqube:7.6-community
+    expose:
+      - 9000
+    ports:
+      - "127.0.0.1:9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=HAGIOLOGY.erythremia.INTELLECT.21
+    volumes:
+      - sonarqube7_data:/opt/sonarqube/data
+      - sonarqube7_extensions:/opt/sonarqube/extensions
+      - sonarqube7_logs:/opt/sonarqube/logs
+      - sonarqube7_conf:/opt/sonarqube/conf
+      - sonarqube7_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+  db:
+    image: postgres
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=HAGIOLOGY.erythremia.INTELLECT.21
+    volumes:
+      - postgresql7:/var/lib/postgresql
+      - postgresql7_data:/var/lib/postgresql/data
+networks:
+  sonarnet:
+volumes:
+  sonarqube7_data:
+  sonarqube7_extensions:
+  sonarqube7_logs:
+  sonarqube7_conf:
+  sonarqube7_bundled-plugins:
+  postgresql7:
+  postgresql7_data:
